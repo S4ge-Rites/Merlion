@@ -10,7 +10,7 @@
 \* * * * * * * * * * * * * * * * * * * * * * * * */
 const fs = require('fs');
 
-const { Client, Intents, Collection, interaction,  } = require('discord.js');
+const { Client, Intents, Collection,  } = require('discord.js');
 const { prefix } = require('./data/config.json');
 const { token } = require("./data/auth.json");
 const { MessageComponentInteraction } = require('discord.js');
@@ -45,20 +45,9 @@ client.once('ready', () => {
         type: "WATCHING",
     });
 });
-const filter = m => m.content.includes('discord');
 
-const collector = interaction.channels.createMessageCollector({ filter, time: 15000 });
-collector.on('collect', async i => {
-	if (i.customId === 'primary') {
-		await i.update({ content: 'A button was clicked!', components: [] });
-	}
-});
 
-collector.on('end', collected => console.log(`Collected ${collected.size} items`));
-client.on('interactionCreate', interaction => {
-	if (!interaction.isButton()) return;
-	console.log(interaction);
-});
+
 
 
 //All the autoresponders
